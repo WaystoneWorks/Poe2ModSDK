@@ -1,0 +1,26 @@
+# {{name}}: a mod with a client half (DLL in the game) and a server half (library in the server),
+# packed into one package. manifest_version 2 is required: older launchers and hooks refuse it.
+manifest_version = 2
+id = "{{id}}"
+name = "{{name}}"
+version = "0.1.0"
+description = "A client DLL that logs hello and a server library that adds !hello."
+authors = ["{{author}}"]
+license = "MIT"
+side = "both"
+
+[game]
+versions = ["{{game_version}}"]
+
+[client]
+dll = "client/{{lib}}_client.dll"
+# The client mod ABI (poe_mod_sdk::client::HOOK_API_VERSION).
+hook_api = {{hook_api}}
+
+[server]
+# The server mod ABI (poe_mod_sdk::server::api::SERVER_API_VERSION).
+server_api = {{server_api}}
+
+[server.library]
+linux = "server/lib{{lib}}_server.so"
+windows = "server/{{lib}}_server.dll"

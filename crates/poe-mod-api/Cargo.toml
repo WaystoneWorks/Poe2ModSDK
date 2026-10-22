@@ -1,0 +1,11 @@
+[package]
+name = "poe-mod-api"
+description = "The C ABI between the PoE2 private server and its native server mods (ServerApi, ModInfo, events and commands); no dependencies"
+edition.workspace = true
+version.workspace = true
+license.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[dependencies]

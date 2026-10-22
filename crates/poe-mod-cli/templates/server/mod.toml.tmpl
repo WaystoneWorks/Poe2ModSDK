@@ -1,0 +1,22 @@
+# {{name}}: a server mod for the PoE2 private-server project (native Rust library).
+# manifest_version 2 is required for server mods: older launchers and hooks refuse it on purpose.
+manifest_version = 2
+id = "{{id}}"
+name = "{{name}}"
+version = "0.1.0"
+description = "Adds the !hello chat command."
+authors = ["{{author}}"]
+license = "MIT"
+side = "server"
+
+[game]
+versions = ["{{game_version}}"]
+
+[server]
+# The server mod ABI this mod is built against (poe_mod_sdk::server::api::SERVER_API_VERSION).
+server_api = {{server_api}}
+
+[server.library]
+# One library per platform the mod supports; the server loads the one for its own OS.
+linux = "server/lib{{lib}}.so"
+windows = "server/{{lib}}.dll"

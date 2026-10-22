@@ -1,0 +1,12 @@
+[package]
+name = "hello-both-server"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+[lib]
+name = "hello_both_server"
+crate-type = ["cdylib"]
+
+[dependencies]
+poe-mod-sdk = { path = "../../../crates/poe-mod-sdk" }

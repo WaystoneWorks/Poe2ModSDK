@@ -1,0 +1,27 @@
+//! {{name}}: a server mod that adds the `!hello` chat command.
+
+use poe_mod_sdk::server::*;
+
+struct Hello;
+
+impl ServerMod for Hello {
+    // `!hello` is delivered whatever the mask says; add Events::PLAYER_JOIN etc. to see more.
+    const EVENTS: Events = Events::NONE;
+
+    fn init(host: &Host) -> Result<Self, String> {
+        host.register_command("hello", "Says hello.", Role::Player)
+            .map_err(|e| format!("cannot register !hello: {e}"))?;
+        host.info(&format!("loaded, server {}", host.server_version()));
+        Ok(Hello)
+    }
+
+    fn event(&self, _host: &Host, event: &Event<'_>, out: &mut Out<'_>) -> Flow {
+        if let Event::Command { player, .. } = event {
+            let _ = out.send_chat(player.id(), &format!("Hello, {}!", player.character()));
+            return Flow::Consumed;
+        }
+        Flow::Continue
+    }
+}
+
+poe_mod_sdk::declare_server_mod!(Hello);

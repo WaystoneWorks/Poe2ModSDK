@@ -1,0 +1,23 @@
+[package]
+name = "poe-mod-cli"
+description = "poe-mod: creates, checks, packs (reproducibly) and verifies PoE2 mod packages"
+edition.workspace = true
+version.workspace = true
+license.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[[bin]]
+name = "poe-mod"
+path = "src/main.rs"
+
+[dependencies]
+poe-mod-api.workspace = true
+poe-hook-mods.workspace = true
+poe-hook-mod-api.workspace = true
+clap = { version = "4", features = ["derive"] }
+zip = { version = "2.6", default-features = false, features = ["deflate"] }
+
+[dev-dependencies]
+tempfile = "3"

@@ -1,0 +1,36 @@
+# Poe2ModSDK: everything a mod author needs for the PoE2 private-server project
+# (https://github.com/WaystoneWorks): the server mod ABI, safe Rust wrappers for client and server
+# mods, and the `poe-mod` tool that creates, packs and verifies mod packages.
+[workspace]
+resolver = "3"
+members = [
+    "crates/poe-mod-api",
+    "crates/poe-mod-sdk",
+    "crates/poe-mod-cli",
+    "examples/hello-client",
+    "examples/hello-server",
+    "examples/hello-both/client",
+    "examples/hello-both/server",
+]
+
+[workspace.package]
+edition = "2024"
+version = "0.1.0"
+license = "MIT"
+repository = "https://github.com/WaystoneWorks/Poe2ModSDK"
+rust-version = "1.85"
+publish = false
+
+[workspace.dependencies]
+poe-mod-api = { path = "crates/poe-mod-api" }
+poe-mod-sdk = { path = "crates/poe-mod-sdk" }
+
+# The client half of the SDK is the client hook's own mod ABI crate and manifest parser, taken
+# from the Poe2ClientHook repository at a pinned commit (see README, "Why git dependencies").
+poe-hook-mod-api = { git = "https://github.com/WaystoneWorks/Poe2ClientHook", rev = "db0fb1e6bc7add7bcbbb05bd85fa98cdf3ad1d76" }
+poe-hook-mods = { git = "https://github.com/WaystoneWorks/Poe2ClientHook", rev = "db0fb1e6bc7add7bcbbb05bd85fa98cdf3ad1d76" }
+
+[profile.release]
+# A mod is a cdylib in someone else's process: smaller and no unwinding across the boundary.
+lto = "thin"
+codegen-units = 1

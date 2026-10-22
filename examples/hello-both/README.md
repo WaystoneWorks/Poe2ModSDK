@@ -1,0 +1,19 @@
+# Hello both
+
+A mod with two halves in one package: `client/` is a DLL for the game, `server/` a library for
+the server. They are two small crates; build each for its target, then pack once.
+
+```sh
+# Client half: a Windows DLL (cargo-xwin on Linux, plain cargo on Windows).
+(cd client && cargo xwin build --release --target x86_64-pc-windows-msvc)
+# Server half: the platform(s) of your server.
+(cd server && cargo build --release)
+# One package with both halves:
+poe-mod pack . \
+  --artifacts client/target/x86_64-pc-windows-msvc/release \
+  --artifacts server/target/release
+poe-mod verify hello-both-0.1.0.zip
+```
+
+Players get the whole zip from the server (the launcher installs the client half); the server
+loads its half. Docs: https://github.com/WaystoneWorks/Poe2ModSDK

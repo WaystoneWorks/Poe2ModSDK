@@ -1,0 +1,84 @@
+name: CI
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+  pull_request:
+env:
+  CARGO_TERM_COLOR: always
+  POE_SDK_REQUIRE_EXAMPLES: "1"
+permissions:
+  contents: read
+
+jobs:
+  build-test:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt, clippy
+      - uses: Swatinem/rust-cache@v2
+      - run: cargo fmt --all --check
+      - run: cargo clippy --workspace --all-targets --all-features -- -D warnings
+      # The examples are cdylibs: build them first, the tests load them like the server does.
+      - run: cargo build --workspace
+      - run: cargo test --workspace
+      - name: Template smoke test (what `poe-mod new` writes must build)
+        shell: bash
+        run: |
+          for kind in client server both; do
+            cargo run -q -p poe-mod-cli -- new "$kind" "smoke-$kind" --dir "$RUNNER_TEMP/smoke-$kind" --sdk-path "$GITHUB_WORKSPACE"
+          done
+          (cd "$RUNNER_TEMP/smoke-client" && cargo build)
+          (cd "$RUNNER_TEMP/smoke-server" && cargo build)
+          (cd "$RUNNER_TEMP/smoke-both/client" && cargo build)
+          (cd "$RUNNER_TEMP/smoke-both/server" && cargo build)
+      - run: cargo build --workspace --release
+      - name: Collect the example libraries
+        shell: bash
+        run: |
+          mkdir -p libs
+          cp target/release/*.dll libs/ 2>/dev/null || true
+          cp target/release/*.so libs/ 2>/dev/null || true
+          ls libs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: libs-${{ matrix.os }}
+          path: libs
+
+  package:
+    # Both platforms' libraries in one package, as a release would: pack, verify, and check
+    # that packing twice gives the same bytes.
+    needs: build-test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+      - uses: actions/download-artifact@v4
+        with:
+          path: libs
+      - run: cargo build --release -p poe-mod-cli
+      - name: Pack and verify the three examples
+        run: |
+          set -e
+          POE=target/release/poe-mod
+          for dir in hello-client hello-server hello-both; do
+            $POE check "examples/$dir"
+            $POE pack "examples/$dir" --out out1 --artifacts libs/libs-ubuntu-latest --artifacts libs/libs-windows-latest
+            $POE pack "examples/$dir" --out out2 --artifacts libs/libs-windows-latest --artifacts libs/libs-ubuntu-latest
+          done
+          for z in out1/*.zip; do
+            $POE verify "$z"
+            cmp "$z" "out2/$(basename "$z")"
+            cmp "$z.sha256" "out2/$(basename "$z").sha256"
+          done
+      - uses: actions/upload-artifact@v4
+        with:
+          name: example-packages
+          path: out1

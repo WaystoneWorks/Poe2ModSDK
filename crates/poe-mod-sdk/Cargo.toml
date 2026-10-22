@@ -1,0 +1,23 @@
+[package]
+name = "poe-mod-sdk"
+description = "Safe Rust wrappers and macros for writing PoE2 private-server mods: native server mods (ServerMod, declare_server_mod!) and client mods (declare_client_mod!)"
+edition.workspace = true
+version.workspace = true
+license.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[features]
+default = ["server"]
+# Safe wrappers for server mods over poe-mod-api.
+server = []
+# Client mods: re-exports the client hook's mod ABI (poe-hook-mod-api) and adds declare_client_mod!.
+client = ["dep:poe-hook-mod-api"]
+
+[dependencies]
+poe-mod-api.workspace = true
+poe-hook-mod-api = { workspace = true, optional = true }
+
+[dev-dependencies]
+libloading = "0.8"

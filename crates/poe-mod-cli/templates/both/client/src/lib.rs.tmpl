@@ -1,0 +1,15 @@
+//! {{name}}, client half: logs a hello line when the game starts.
+
+use poe_mod_sdk::client::HookApi;
+
+fn init(api: &HookApi) -> Result<(), String> {
+    api.info(&format!(
+        "hello from {}: game build {}, read_only={}",
+        api.id(),
+        api.game_version(),
+        api.read_only()
+    ));
+    Ok(())
+}
+
+poe_mod_sdk::declare_client_mod!(init);

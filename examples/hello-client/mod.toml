@@ -1,0 +1,20 @@
+# Hello client: a client mod for the PoE2 private-server project. Spec:
+# https://github.com/WaystoneWorks/Poe2ClientHook/blob/main/docs/mod-manifest.md
+#
+# manifest_version 1 is read by every launcher and client hook; a client mod only needs 2 when it
+# uses the v2 sections. Pack it with `poe-mod pack` (see README.md).
+manifest_version = 1
+id = "hello-client"
+name = "Hello client"
+version = "0.1.0"
+description = "A client mod that logs a hello line."
+authors = ["WaystoneWorks and contributors"]
+license = "MIT"
+
+[game]
+versions = ["0.5.5e"]
+# The client mod ABI this mod is built against (poe_mod_sdk::client::HOOK_API_VERSION).
+hook_api = 1
+
+[entry]
+dll = "client/hello_client.dll"

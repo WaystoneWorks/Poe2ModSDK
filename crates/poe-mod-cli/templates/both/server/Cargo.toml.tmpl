@@ -1,0 +1,12 @@
+[package]
+name = "{{id}}-server"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+[lib]
+name = "{{lib}}_server"
+crate-type = ["cdylib"]
+
+[dependencies]
+poe-mod-sdk = {{sdk_server}}

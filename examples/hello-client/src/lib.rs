@@ -1,0 +1,16 @@
+//! Hello client: the smallest client mod. The client hook's loader calls `init` when the game starts
+//! (never in official mode) and tags the log lines `mod:hello-client`.
+
+use poe_mod_sdk::client::HookApi;
+
+fn init(api: &HookApi) -> Result<(), String> {
+    api.info(&format!(
+        "hello from {}: game build {}, read_only={}",
+        api.id(),
+        api.game_version(),
+        api.read_only()
+    ));
+    Ok(())
+}
+
+poe_mod_sdk::declare_client_mod!(init);
