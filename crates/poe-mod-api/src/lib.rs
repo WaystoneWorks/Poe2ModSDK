@@ -192,7 +192,7 @@ pub struct ServerApi {
     pub game_version: Str,
     /// Writes a record to the server log, tagged `mod:<id>`. `level` is `LOG_*`.
     pub log: extern "C" fn(ctx: *const c_void, level: u32, message: Str),
-    /// Reads `key` of this mod's configuration (`[mods.<id>]` in `server.toml`, rendered as
+    /// Reads `key` of this mod's configuration (`[mods.config.<id>]` in `server.toml`, rendered as
     /// text) into `buf` (up to `cap` bytes, not NUL-terminated). Returns the value's full length
     /// in bytes (larger than `cap` means it was cut; call again with a bigger buffer), or a
     /// negative [`ERR_NOT_FOUND`] when the key is not set. `buf` may be null with `cap` 0 to ask

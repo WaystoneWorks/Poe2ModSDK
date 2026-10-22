@@ -153,7 +153,7 @@ impl Host {
         self.log(Level::Debug, message);
     }
 
-    /// A value of this mod's configuration (`[mods.<id>]` of the server's config), as text.
+    /// A value of this mod's configuration (`[mods.config.<id>]` of the server's config), as text.
     pub fn config(&self, key: &str) -> Option<String> {
         let a = self.api();
         let mut buf = vec![0u8; 256];

@@ -42,7 +42,7 @@ poe_mod_sdk::declare_server_mod!(MyMod);
 |---|---|
 | `id()`, `mod_dir()`, `server_dir()`, `server_version()`, `game_version()` | where you are |
 | `log` / `info` / `warn` / `error` / `debug` | records tagged `mod:<id>` in the server log |
-| `config(key)` | a value of your section `[mods.<id>]` of the server's config, as text (`None` when unset) |
+| `config(key)` | a value of your section `[mods.config.<id>]` of the server's config, as text (`None` when unset) |
 | `register_command(name, help, role)` | a chat command `!name` (`Role::Player` or `Role::Admin`). **Only in `init`.** Names are `[a-z][a-z0-9_-]{0,31}`; a name the server or another mod has is `ERR_EXISTS`. |
 
 ## Events
