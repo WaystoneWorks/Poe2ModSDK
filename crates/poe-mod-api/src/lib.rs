@@ -431,7 +431,10 @@ mod tests {
 
     #[test]
     fn str_round_trips_and_empty_is_safe() {
-        assert_eq!(unsafe { Str::new("0.5.5e.hotfix1").as_str() }, "0.5.5e.hotfix1");
+        assert_eq!(
+            unsafe { Str::new("0.5.5e.hotfix1").as_str() },
+            "0.5.5e.hotfix1"
+        );
         assert_eq!(unsafe { Str::EMPTY.as_str() }, "");
     }
 
