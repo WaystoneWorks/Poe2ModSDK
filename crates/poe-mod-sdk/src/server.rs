@@ -127,7 +127,7 @@ impl Host {
         unsafe { self.api().server_version.as_str() }
     }
 
-    /// The game client version the server speaks, e.g. `0.5.5e`.
+    /// The game client version the server speaks, e.g. `0.5.5e.hotfix1`.
     pub fn game_version(&self) -> &str {
         unsafe { self.api().game_version.as_str() }
     }
@@ -668,7 +668,7 @@ mod tests {
             mod_dir: raw::Str::new("/srv/mods/test-mod"),
             server_dir: raw::Str::new("/srv"),
             server_version: raw::Str::new("9.9.9"),
-            game_version: raw::Str::new("0.5.5e"),
+            game_version: raw::Str::new("0.5.5e.hotfix1"),
             log: f_log,
             config_get: f_config,
             register_command: f_register,
@@ -995,7 +995,7 @@ mod tests {
         assert_eq!(host.config("short").as_deref(), Some("ok"));
         assert_eq!(host.config("nope"), None);
         assert_eq!(host.id(), "test-mod");
-        assert_eq!(host.game_version(), "0.5.5e");
+        assert_eq!(host.game_version(), "0.5.5e.hotfix1");
         assert_eq!(host.mod_dir(), "/srv/mods/test-mod");
     }
 

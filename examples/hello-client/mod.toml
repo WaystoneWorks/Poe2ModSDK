@@ -12,7 +12,7 @@ authors = ["WaystoneWorks and contributors"]
 license = "MIT"
 
 [game]
-versions = ["0.5.5e"]
+versions = ["0.5.5e.hotfix1"]
 # The client mod ABI this mod is built against (poe_mod_sdk::client::HOOK_API_VERSION).
 hook_api = 1
 

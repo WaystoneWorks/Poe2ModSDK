@@ -10,7 +10,7 @@ use clap::ValueEnum;
 use poe_hook_mods::valid_id;
 
 /// The game version new mods are made for (the server and client this SDK release targets).
-pub const GAME_VERSION: &str = "0.5.5e";
+pub const GAME_VERSION: &str = "0.5.5e.hotfix1";
 const SDK_GIT: &str = "https://github.com/WaystoneWorks/Poe2ModSDK";
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, ValueEnum)]

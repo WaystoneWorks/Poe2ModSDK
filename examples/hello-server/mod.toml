@@ -10,7 +10,7 @@ license = "MIT"
 side = "server"
 
 [game]
-versions = ["0.5.5e"]
+versions = ["0.5.5e.hotfix1"]
 
 [server]
 # The server mod ABI this mod is built against (poe_mod_sdk::server::api::SERVER_API_VERSION).
