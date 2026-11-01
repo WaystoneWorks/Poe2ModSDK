@@ -23,11 +23,7 @@ One package per mod, with a `mod.toml` that says **where it runs**: `side = "cli
 The manifest format (v1 and v2) is specified in the hook repository:
 [docs/mod-manifest.md](https://github.com/WaystoneWorks/Poe2ClientHook/blob/main/docs/mod-manifest.md).
 
-> **Status.** This is the SDK foundation. You can already write, build, pack and verify client mods (the hook loads them today),
-> and write, build, pack and verify server mods against the ABI. The **server's loader** for server mods, the server
-> advertising required mods and the launcher's mod sync come in the next work packages of the main project; until the loader
-> lands, a server mod package is valid and loadable by tests (this repository loads the example the way the server will), but a
-> running server does not load it yet.
+> **Status.** You can write, build, pack and verify client mods (the hook loads them) and server mods against the ABI; this repository loads the example server mod the way the server does in tests.
 
 ## Quick start
 
@@ -72,13 +68,7 @@ The mod never touches the world directly: events carry read-only snapshots, and 
 
 ## Why git dependencies
 
-The client half of the SDK is the client hook's own `poe-hook-mod-api` (the `HookApi` ABI) and `poe-hook-mods` (the manifest
-parser and the package verifier). They are **git dependencies pinned to a commit** of
-[Poe2ClientHook](https://github.com/WaystoneWorks/Poe2ClientHook) (see `[workspace.dependencies]` in `Cargo.toml`) rather than
-a vendored copy: the ABI crate and the parser have exactly one source of truth, so the SDK can never drift from the loader that
-reads the mods, and the layout tests that pin the ABI travel with the commit. Updating the pin is a one-line change plus CI.
-The SDK's own ABI crate, `poe-mod-api`, is the server's counterpart and lives here.
-Projects made by `poe-mod new` depend on `poe-mod-sdk` by git tag (`v<version>` of this repository).
+The client half of the SDK is the client hook's own `poe-hook-mod-api` (the `HookApi` ABI) and `poe-hook-mods` (manifest parser and package verifier), as **git dependencies pinned to a commit** of [Poe2ClientHook](https://github.com/WaystoneWorks/Poe2ClientHook) (`[workspace.dependencies]` in `Cargo.toml`), so the SDK cannot drift from the loader. The server ABI crate `poe-mod-api` lives here. Projects made by `poe-mod new` depend on `poe-mod-sdk` by git tag (`v<version>` of this repository).
 
 ## Build and test
 

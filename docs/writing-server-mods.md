@@ -1,10 +1,8 @@
 # Writing a server mod
 
-A server mod is a Rust `cdylib` that the server loads. This page describes server API 1; the contract in full is the documentation
-of [`poe-mod-api`](../crates/poe-mod-api/src/lib.rs), the stability rules are in [abi-stability.md](abi-stability.md).
+A server mod is a Rust `cdylib` that the server loads. This page describes server API 1; the full contract is the documentation of [`poe-mod-api`](../crates/poe-mod-api/src/lib.rs), the stability rules are in [abi-stability.md](abi-stability.md).
 
-> The server's loader is a later work package of the main project. Everything here is the contract it will implement; the SDK
-> test `the_example_server_mod_loads_registers_hello_and_answers_it` drives a real built library through the same exports with a fake host.
+> The server's loader implements this contract; the SDK test `the_example_server_mod_loads_registers_hello_and_answers_it` drives a real built library through the same exports with a fake host.
 
 ## Start
 
