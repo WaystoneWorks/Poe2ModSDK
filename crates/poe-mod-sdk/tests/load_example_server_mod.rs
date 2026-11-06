@@ -99,7 +99,7 @@ fn the_example_server_mod_loads_registers_hello_and_answers_it() {
         mod_dir: Str::new("mods/hello-server"),
         server_dir: Str::new("."),
         server_version: Str::new("9.9.9"),
-        game_version: Str::new("0.5.5e.hotfix1"),
+        game_version: Str::new("0.5.5f"),
         log,
         config_get,
         register_command,

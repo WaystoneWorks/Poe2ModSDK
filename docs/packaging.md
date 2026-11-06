@@ -53,7 +53,7 @@ Warnings (not refusals): unknown manifest keys, no `game.versions`, a server lib
 ## Versions
 
 * `version` is semver. A server pins **exact version and hash**; two versions of a mod can sit side by side in a launcher's cache.
-* `game.versions` lists the client builds the mod was made for (e.g. `0.5.5e.hotfix1`).
+* `game.versions` lists the client builds the mod was made for (e.g. `0.5.5f`).
 * The ABI numbers (`hook_api`, `server_api`) must equal what the host offers; see [abi-stability.md](abi-stability.md).
 * `manifest_version = 2` is required for `side = "server"` and `"both"`. Programs that read only v1 refuse such a manifest on purpose, so a server-only
   mod can never be mistaken for a client mod. A client-only mod can stay at v1 to keep working with older launchers.

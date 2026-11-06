@@ -221,7 +221,7 @@ mod tests {
     use super::*;
     use std::fs;
 
-    const MANIFEST: &str = "manifest_version = 2\nid = \"hello\"\nname = \"Hello\"\nversion = \"1.0.0\"\nside = \"both\"\n[game]\nversions = [\"0.5.5e.hotfix1\"]\n[client]\ndll = \"client/hello.dll\"\nhook_api = 1\n[server]\nserver_api = 1\n[server.library]\nlinux = \"server/libhello.so\"\nwindows = \"server/hello.dll\"\n";
+    const MANIFEST: &str = "manifest_version = 2\nid = \"hello\"\nname = \"Hello\"\nversion = \"1.0.0\"\nside = \"both\"\n[game]\nversions = [\"0.5.5f\"]\n[client]\ndll = \"client/hello.dll\"\nhook_api = 1\n[server]\nserver_api = 1\n[server.library]\nlinux = \"server/libhello.so\"\nwindows = \"server/hello.dll\"\n";
 
     struct Fixture {
         _t: tempfile::TempDir,

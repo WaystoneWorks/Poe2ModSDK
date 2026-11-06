@@ -10,7 +10,7 @@ license = "MIT"
 side = "both"
 
 [game]
-versions = ["0.5.5e.hotfix1"]
+versions = ["0.5.5f"]
 
 [client]
 dll = "client/hello_both_client.dll"

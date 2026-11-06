@@ -103,7 +103,7 @@ mod tests {
             mod_id: Str::new("t"),
             mod_dir: Str::new("d"),
             exe_dir: Str::new("e"),
-            game_version: Str::new("0.5.5e.hotfix1"),
+            game_version: Str::new("0.5.5f"),
             build_revision: Str::new("1"),
             build_verified: 1,
             reserved: 0,

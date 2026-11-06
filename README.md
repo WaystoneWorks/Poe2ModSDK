@@ -1,7 +1,7 @@
 # Poe2ModSDK
 
 The mod SDK of the [Poe2ModdingProject](https://github.com/WaystoneWorks/Poe2ModdingProject), a private server for
-**Path of Exile 2 client 0.5.5e Hotfix 1** (unofficial, personal and educational use; never used against official servers).
+**Path of Exile 2 client 0.5.5f** (unofficial, personal and educational use; never used against official servers).
 It has everything to write, pack and verify a mod:
 
 | Part | What it is |
