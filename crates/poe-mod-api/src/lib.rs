@@ -188,7 +188,7 @@ pub struct ServerApi {
     pub server_dir: Str,
     /// The server's version, e.g. `0.3.1`.
     pub server_version: Str,
-    /// The game client version the server speaks, e.g. `0.5.5g`.
+    /// The game client version the server speaks, e.g. `0.5.5h`.
     pub game_version: Str,
     /// Writes a record to the server log, tagged `mod:<id>`. `level` is `LOG_*`.
     pub log: extern "C" fn(ctx: *const c_void, level: u32, message: Str),
@@ -432,8 +432,8 @@ mod tests {
     #[test]
     fn str_round_trips_and_empty_is_safe() {
         assert_eq!(
-            unsafe { Str::new("0.5.5g").as_str() },
-            "0.5.5g"
+            unsafe { Str::new("0.5.5h").as_str() },
+            "0.5.5h"
         );
         assert_eq!(unsafe { Str::EMPTY.as_str() }, "");
     }
